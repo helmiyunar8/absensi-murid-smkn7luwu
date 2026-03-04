@@ -76,7 +76,14 @@ Kirim ke Guru
 </div>
 
 <script>
+const today = new Date().toLocaleDateString();
 
+const lastSubmit = localStorage.getItem("lastSubmit");
+
+if(lastSubmit === today){
+document.getElementById("attendance-form").innerHTML =
+"<h2 style='text-align:center;color:red;font-weight:bold'>Anda sudah absen hari ini ✅</h2>";
+}
 document.getElementById("attendance-form").addEventListener("submit", async function(e){
 e.preventDefault();
 
@@ -100,6 +107,7 @@ body: JSON.stringify(data)
 });
 
 document.getElementById("status").innerText = "✅ Berhasil dikirim!";
+  localStorage.setItem("lastSubmit", today);
 this.reset();
 
 });
